@@ -10,7 +10,7 @@
      \__/\_/
 ```
 
-**CatMCP** is a lightweight, playful, and fully standard-compliant **Model Context Protocol (MCP)** server that serves a curated collection of hilarious cat jokes to LLM clients (like Claude Desktop, Cursor, and more). Whether you need tech puns, classic question-and-answers, silly scenarios, or workplace meow-ments, CatMCP has you covered!
+**CatMCP** is a lightweight, playful, and fully standard-compliant **Model Context Protocol (MCP)** server that serves a curated collection of hilarious cat jokes to LLM clients (like Claude Desktop, Cursor, VS Code, Windsurf, and more). Whether you need tech puns, classic question-and-answers, silly scenarios, or workplace meow-ments, CatMCP has you covered!
 
 ---
 
@@ -77,10 +77,10 @@ uv run python main.py
 
 ## ⚙️ Host Configuration
 
-To integrate CatMCP with your favorite LLM client, add the server to your configuration file.
+To integrate CatMCP with your favorite LLM client, add the server configuration using the paths and snippets below.
 
-### Claude Desktop
-Add this to your `claude_desktop_config.json`:
+### 1. Claude Desktop
+Add this to your `claude_desktop_config.json` (located at `~/Library/Application Support/Claude/claude_desktop_config.json` on macOS or `%APPDATA%\Claude\claude_desktop_config.json` on Windows):
 
 ```json
 {
@@ -99,13 +99,53 @@ Add this to your `claude_desktop_config.json`:
 }
 ```
 
-### Cursor
+### 2. Cursor
 1. Go to **Settings** > **Features** > **MCP**.
 2. Click **+ Add New MCP Server**.
 3. Fill in the fields:
    - **Name**: `CatMCP`
    - **Type**: `command`
    - **Command**: `uv --directory "/absolute/path/to/catmcp" run python main.py`
+
+### 3. VS Code (via Cline / Roo Code)
+If you use popular AI coding assistants like **Cline** or **Roo Code** in VS Code, add the following to your `cline_mcp_settings.json` (located at `~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json` on macOS or `%APPDATA%\Code\User\globalStorage\saoudrizwan.claude-dev\settings\cline_mcp_settings.json` on Windows):
+
+```json
+{
+  "mcpServers": {
+    "catmcp": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "/absolute/path/to/catmcp",
+        "run",
+        "python",
+        "main.py"
+      ]
+    }
+  }
+}
+```
+
+### 4. Windsurf
+Windsurf supports MCP natively. You can configure CatMCP by editing your global `mcp_config.json` (located at `~/.codeium/windsurf/mcp_config.json` on macOS/Linux or `%USERPROFILE%\.codeium\windsurf\mcp_config.json` on Windows):
+
+```json
+{
+  "mcpServers": {
+    "catmcp": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "/absolute/path/to/catmcp",
+        "run",
+        "python",
+        "main.py"
+      ]
+    }
+  }
+}
+```
 
 ---
 
